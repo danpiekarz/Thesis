@@ -7,16 +7,17 @@ public class LEDOutput extends Thread {
 	public double myLedx, myLedy, myLedz, ledDistance;
 	final double distanceBetweenLEDS = 1.67;
 
-	LEDOutput[] myLEDArray;
-	JavaSpatialMatrix myLocation;
+	public LEDOutput[] myLEDArray;
+	public JavaSpatialMatrix myLocation;
+	public static TrueLED[] trueLEDArray;
 
-	private LEDOutput(int ledNumber) {
+	LEDOutput(int ledNumber, boolean ledStatus, double ledDistance, double myLedx, double myLedy, double myLedz) {
 		ledNumber = this.ledNumber;
-		ledStatus = false;
-		ledDistance = (ledNumber * distanceBetweenLEDS);
-		myLedx = 0;
-		myLedy = 0;
-		myLedz = 0;
+		ledStatus = this.ledStatus;
+		ledDistance = this.ledDistance;
+		myLedx = this.myLedx;
+		myLedy = this.myLedy;
+		myLedz = this.myLedz;
 	}
 
 	/*
@@ -32,21 +33,27 @@ public class LEDOutput extends Thread {
 		ledNumber = 0;
 		myLEDArray = new LEDOutput[noOfLeds];
 		while (ledNumber < noOfLeds) {
-			myLEDArray[ledNumber] = new LEDOutput(ledNumber);
+			myLEDArray[ledNumber] = new LEDOutput(ledNumber, false, (distanceBetweenLEDS*noOfLeds), 0, 0, 0);
 			ledNumber++;
 		}
 	}
 
 	public synchronized void getRealTimeLocation() {
-		myLocation.getPosition();
+		
 		for (int i = 0; i < noOfLeds; i++) {
+			myLocation.getPosition();
 			updateDeviceLocation(myLEDArray[i]);
 		}
 	}
 
-	public void updateDeviceLocation(LEDOutput ledObject) {
+	public void updateDeviceLocation(LEDOutput ledObject){
 		ledObject.myLedx = myLocation.xLoc + (ledObject.ledDistance * Math.sin(Math.toRadians(myLocation.getZAngle())));
 		ledObject.myLedy = myLocation.yLoc + (ledObject.ledDistance * Math.cos(Math.toRadians(myLocation.getZAngle())));
+	}
+	
+	public void updateLEDStatus(){
+		trueLEDArray = DisplayMatrix.returnTrueLEDArray();
+		System.out.print("\nFrom LEDOutput, number of objects in trueLEDArray is:" + trueLEDArray.length);
 	}
 
 }

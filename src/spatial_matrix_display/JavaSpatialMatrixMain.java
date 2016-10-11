@@ -12,9 +12,17 @@ public class JavaSpatialMatrixMain {
 		// position/orientation to origin
 		JavaSpatialMatrix myLocation = new JavaSpatialMatrix(0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0);
-		DisplayMatrix test = new DisplayMatrix(29, 29);
+		DisplayMatrix test = new DisplayMatrix(30, 30);
 		test.findTrueLED();
-
+		
+		/*
+		 * testing crap to see if LEDOutput works
+		 * 
+		LEDOutput testing = new LEDOutput(0, false, 0, 0, 0, 0);
+		testing.Initialise();
+		testing.updateLEDStatus();
+		 */
+		
 	}
 
 	// This prints the data values for each axis
