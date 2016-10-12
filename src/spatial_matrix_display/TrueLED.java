@@ -6,9 +6,9 @@ package spatial_matrix_display;
  */
 public class TrueLED {
 	double x, y;
-	final double distanceBetweenLEDS = 1.67;
+	
 	TrueLED(double x, double y) {
-		this.x = x*distanceBetweenLEDS;
-		this.y = y*distanceBetweenLEDS;
+		this.x = x*JavaSpatialMatrixMain.distanceBetweenLEDS;
+		this.y = y*JavaSpatialMatrixMain.distanceBetweenLEDS;
 	}
 }

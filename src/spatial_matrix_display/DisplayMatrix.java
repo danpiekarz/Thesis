@@ -24,14 +24,6 @@ public class DisplayMatrix {
 		/* zLength = z_Length; */
 	}
 
-	/*
-	 * DisplayMatrix getMatrix(){ if(xLength == 0 || yLength == 0){
-	 * System.out.println("The(x_Length=0) or (y_Length=0)");
-	 * 
-	 * } System.out.println("Passing 2D Matrix object with " + yLength +
-	 * " rows and" + xLength + " columns."); return LEDMatrix; }
-	 */
-
 	public int getXLength() {
 		return xLength;
 	}
@@ -71,7 +63,7 @@ public class DisplayMatrix {
 		for (int i = 0; i < yLength; i++) {
 			for (int j = 0; j < xLength; j++) {
 				if (LEDMatrix[i][j] == true) {
-					TrueLED onLED = new TrueLED(j - xLength, 30 - i);
+					TrueLED onLED = new TrueLED(j - xLength, yLength - i);
 					trueLEDList.add(onLED);
 				}
 			}
@@ -86,4 +78,10 @@ public class DisplayMatrix {
 		return (trueLEDArray);
 	}
 
+	public static void printNodeData() {
+		for (int i = 0; i < trueLEDArray.length; i++) {
+			System.out.println("True node at (x,y): (" + JavaSpatialMatrixMain.trueLEDArray[i].x + ", "
+					+ JavaSpatialMatrixMain.trueLEDArray[i].y + ")");
+		}
+	}
 }
